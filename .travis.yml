@@ -1,0 +1,25 @@
+language: rust
+
+rust:
+  - nightly-2020-11-15
+
+cache:
+  apt: true
+  directories:
+    - $TRAVIS_HOME/.cache/sccache
+    - $TRAVIS_HOME/.cargo/
+    - $TRAVIS_HOME/.rustup/
+
+before_cache:
+  - rm -rf "$TRAVIS_HOME/.cargo/registry"
+  - rm -rf "$TRAVIS_HOME/.cargo/git"
+
+install:
+  - travis_wait 30 cargo build --verbose --workspace
+
+before_script:
+  - rustup component add clippy
+
+script:
+  - cargo clippy -- -D warnings
+  - cargo test --verbose --workspace --all-features

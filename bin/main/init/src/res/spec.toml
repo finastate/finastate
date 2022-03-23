@@ -1,0 +1,93 @@
+# This is a TOML config file.
+# For more information, see https://github.com/toml-lang/toml
+
+# NOTICE: This file should NOT be modified once the chain node is started.
+
+[basic]
+hash = "blake2b_256"
+dsa = "ed25519"
+address = "blake2b_160"
+
+[genesis]
+
+[[genesis.txs]]
+module = "system"
+method = "init"
+params = '''
+{
+    "chain_id": "${CHAIN_ID}",
+    "timestamp": "${TIME}",
+    "max_until_gap": 20,
+    "max_execution_gap": 8,
+    "consensus": "poa"
+}
+'''
+
+[[genesis.txs]]
+module = "balance"
+method = "init"
+params = '''
+{
+    "endow": []
+}
+'''
+
+[[genesis.txs]]
+module = "poa"
+method = "init"
+params = '''
+{
+    "block_interval": 3000,
+    "admin": {
+        "threshold": 1,
+        "members": [["", 1]]
+    },
+    "authority": ""
+}
+'''
+
+# [[genesis.txs]]
+# module = "raft"
+# method = "init"
+# params = '''
+# {
+#   "block_interval": 3000,
+#   "heartbeat_interval": 100,
+#   "election_timeout_min": 500,
+#   "election_timeout_max": 1000,
+#   "admin": {
+#       "threshold": 1,
+#       "members": [["", 1]]
+#   },
+#   "authorities": {
+#       "members": [
+#           ""
+#       ]
+#   }
+# }
+# '''
+
+# [[genesis.txs]]
+# module = "hotstuff"
+# method = "init"
+# params = '''
+# {
+#   "block_interval": 3000,
+# 	"view_timeout": 6000,
+# 	"admin": {
+#       "threshold": 1,
+#       "members": [["", 1]]
+#   },
+#   "authorities": {
+#       "members": [["", 1]]
+#   }
+# }
+# '''
+
+[[genesis.txs]]
+module = "contract"
+method = "init"
+params = '''
+{
+}
+'''

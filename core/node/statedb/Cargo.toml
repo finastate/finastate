@@ -1,0 +1,29 @@
+[package]
+name = "node-statedb"
+version = "0.1.0"
+authors = ["developer <developer@finastate.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+memory-db = "0.19.0"
+hash-db = "0.15.2"
+log = "0.4.8"
+trie-db = "0.20.0"
+trie-root = "0.16.0"
+lazy_static = "1.4.0"
+mut_static = "5.0.0"
+fixed-hash = "0.6.0"
+reference-trie = "0.20.0"
+
+node-db = { path = "../db" }
+crypto = { path = "../../crypto" }
+primitives = { path = "../../primitives" }
+
+[dev-dependencies]
+tempfile = "3.1.0"
+utils-test = { path = "../../../utils/test" }
+
+[features]
+build-dep-test = []
